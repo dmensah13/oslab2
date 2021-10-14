@@ -15,14 +15,15 @@ void  main(void)
      pid_t  pid;
      int i;
      int j;
+     int status;
      for(i = 0; i < 2; i++){
        pid = fork();
        if(pid == 0)
          ChildProcess(i);
        else if(pid > 0){
-         while(wait(NULL) != -1 ||errno != ECHILD){
-           j = wait(NULL);
-           ParentProcess(j);
+         while(wait(&status) != -1 ||errno != ECHILD){
+           wait(&status);
+           ParentProcess(status);
          }
        }
        else
@@ -48,9 +49,9 @@ void  ChildProcess(int pid)
          printf("Child Process:%d is going to sleep!\n", pidID);
          sleep(sleep_time);
          printf("Child Process:%d is awake!\n", pidID);
-         printf("Where is my Parent:%d\n", parentID)
+         printf("Where is my Parent:%d\n", parentID);
        }
-       exit(0);
+       exit(1);
      }
   
      //Child Process 2
@@ -60,9 +61,9 @@ void  ChildProcess(int pid)
          printf("Child Process:%d is going to sleep!\n", pidID);
          sleep(sleep_time);
          printf("Child Process:%d is awake!\n", pidID);
-         printf("Where is my Parent:%d\n", parentID)
+         printf("Where is my Parent:%d\n", parentID);
        }
-       exit(0);
+       exit(1);
      }
   
      /*
@@ -75,7 +76,7 @@ void  ChildProcess(int pid)
 void  ParentProcess(int child)
 {
      
-     printf("Child Process:%d has completed", child);
+     printf("Child Process:%d has completed\n", child);
      /*
      int   i;
   
