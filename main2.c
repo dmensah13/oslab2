@@ -47,7 +47,7 @@ void  ChildProcess(int pid)
        for (i = 0; i < number; i++){
          printf("Child Process:%d is going to sleep!\n", pidID);
          sleep(sleep_time);
-         printf("Child Process:%d is awake!\nWhere is my Parent:%d", pidID);
+         printf("Child Process:%d is awake!\n", pidID);
          printf("Where is my Parent:%d\n", parentID)
        }
        exit(0);
@@ -59,7 +59,7 @@ void  ChildProcess(int pid)
        for (i = 0; i < number; i++){
          printf("Child Process:%d is going to sleep!\n", pidID);
          sleep(sleep_time);
-         printf("Child Process:%d is awake!\nWhere is my Parent:%d", pidID);
+         printf("Child Process:%d is awake!\n", pidID);
          printf("Where is my Parent:%d\n", parentID)
        }
        exit(0);
