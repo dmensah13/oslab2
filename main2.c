@@ -8,7 +8,7 @@
 #define   MAX_COUNT  200
 
 void  ChildProcess(int pid);                /* child process prototype  */
-void  ParentProcess(int child);               /* parent process prototype */
+void  ParentProcess(int child);             /* parent process prototype */
 
 void  main(void)
 {
@@ -21,13 +21,11 @@ void  main(void)
        if(pid == 0)
          ChildProcess(i);
        else if(pid > 0){
-         while(wait(&status) != -1 ||errno != ECHILD){
-           wait(&status);
            ParentProcess(status);
          }
-       }
-       else
+       else{
          printf("Error in Fork\n");
+       }
      }
 }
 
@@ -36,8 +34,8 @@ void  ChildProcess(int pid)
      int number;
      int sleep_time;
      srand(time(NULL));
-     number = rand() % 31;
-     sleep_time = rand() % 11;
+     number = (rand() % (31 - 1 + 1)) + 1;
+     sleep_time = (rand() % (11 - 1 + 1))+1;
   
      int   i;
      int pidID = getpid();
@@ -73,10 +71,10 @@ void  ChildProcess(int pid)
      */
 }
 
-void  ParentProcess(int child)
+void  ParentProcess(int status)
 {
-     
-     printf("Child Process:%d has completed\n", child);
+     wait(&status);
+     printf("Child Process:%d has completed\n", status);
      /*
      int   i;
   
